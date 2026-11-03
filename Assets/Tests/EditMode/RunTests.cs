@@ -227,6 +227,22 @@ namespace ShapeShifter.Core.Tests
         }
 
         [Test]
+        public void EndingARunEarlyKeepsItsScoreAndStopsIt()
+        {
+            Run run = On(new Obstacle[0], new[] { new Pickup(PickupKind.Coin, 3f, Tuning.BodyCenter) });
+            RunTo(run, 10f);
+            int total = run.Score.Total;
+            run.EndNow();
+            Assert.That(run.Over, Is.True);
+            Assert.That(run.Events.Single().Kind, Is.EqualTo(RunEventKind.GameOver));
+            Assert.That(run.Score.Total, Is.EqualTo(total));
+            Assert.That(run.Score.Coins, Is.EqualTo(1));
+            Assert.That(run.Health.Hearts, Is.EqualTo(Tuning.MaxHearts));
+            run.EndNow();
+            Assert.That(run.Events, Is.Empty, "ending twice does nothing");
+        }
+
+        [Test]
         public void CoinsAreCollectedOnTheRunnersPathButNotFarAboveIt()
         {
             Run run = On(new Obstacle[0], new[] { new Pickup(PickupKind.Coin, 5f, Tuning.BodyCenter), new Pickup(PickupKind.Coin, 8f, 3.2f) });

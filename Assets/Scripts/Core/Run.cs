@@ -111,6 +111,15 @@ namespace ShapeShifter.Core
             }
         }
 
+        /// <summary>Ends the run where it stands (the player chose "End run"); score and coins are kept.</summary>
+        public void EndNow()
+        {
+            events.Clear();
+            if (Over) return;
+            Over = true;
+            Emit(RunEventKind.GameOver);
+        }
+
         public void Step(float dt, RunInput input)
         {
             events.Clear();
