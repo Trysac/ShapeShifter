@@ -17,6 +17,7 @@ short cooldown follows every shift, and the track keeps getting faster.
 
 - **In your browser:** [trysac.github.io/ShapeShifter](https://trysac.github.io/ShapeShifter/)
   (published from the WebGL build of this repository)
+- **On itch.io:** [trysac.itch.io/shapeshifter](https://trysac.itch.io/shapeshifter)
 - **Get the code:** fork this repository, or clone it:
 
   ```bash
