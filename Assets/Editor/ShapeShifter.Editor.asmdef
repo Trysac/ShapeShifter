@@ -1,0 +1,19 @@
+{
+    "name": "ShapeShifter.Editor",
+    "rootNamespace": "ShapeShifter.EditorTools",
+    "references": [
+        "ShapeShifter.Core",
+        "ShapeShifter.Game"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

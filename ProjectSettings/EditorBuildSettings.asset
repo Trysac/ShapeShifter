@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ShapeShifter.unity
+    guid: 040d51a106c6a3549a69ba6d6125b093
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

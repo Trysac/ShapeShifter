@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3648d7dc9d750ee47b1ac1912f994438, type: 3}
+  m_Name: GameArt
+  m_EditorClassIdentifier: ShapeShifter.Game::ShapeShifter.Game.GameArt
+  Runners:
+  - {fileID: 2800000, guid: 4338c5f0e8e64314c84b30885e63fe22, type: 3}
+  - {fileID: 2800000, guid: db784a143d9a3a44cb25693c724de4f3, type: 3}
+  - {fileID: 2800000, guid: 5359d6d01f34976418482ead00b12b33, type: 3}
+  - {fileID: 2800000, guid: 92ed77d952a063f42a46e26b14ce1d86, type: 3}
+  - {fileID: 2800000, guid: 8fbf8c3d547545d419c8ffc5879c2b3d, type: 3}
+  Items: {fileID: 2800000, guid: 6ee06f6b679b16047862ae659d59acc7, type: 3}
+  Signs: {fileID: 2800000, guid: 33c7fbfcde5476a46a3476c4d7167341, type: 3}
+  Boulder: {fileID: 2800000, guid: 8597731895a36b54ab20df70d6a88210, type: 3}
+  Effects: {fileID: 2800000, guid: a74984ec1f1c41a43a1cdc52ffe1557f, type: 3}
+  Tiles: {fileID: 2800000, guid: f794a927c3de625409af8ba61d7c45f7, type: 3}
+  Thicket: {fileID: 2800000, guid: aa53e767d7c1c494ea15d278bdc52912, type: 3}
+  ForestFar: {fileID: 2800000, guid: 5cea412ceb530f34aab3602c096fc22d, type: 3}
+  ForestNear: {fileID: 2800000, guid: 86f8edf7ea1656249a45205133379d3b, type: 3}
+  CaveFar: {fileID: 2800000, guid: aaf1863ad73fdf0488f9d34460f794ff, type: 3}
+  CaveNear: {fileID: 2800000, guid: 10c881d63df9b4846a0fff3e74b49117, type: 3}
+  Badges:
+  - {fileID: 2800000, guid: b04ec35f58cea2b49ad62b150a10c3bc, type: 3}
+  - {fileID: 2800000, guid: 02379707a0d8fab43ba54076bc06f17b, type: 3}
+  - {fileID: 2800000, guid: 4af788e7f77c4cb47b75110912fc9714, type: 3}
+  - {fileID: 2800000, guid: f7641b99c6e1e704d9108ada27a1c780, type: 3}
+  Heart: {fileID: 2800000, guid: 5c3007cce30659a47ba3cbf489f0ed59, type: 3}
+  HeartEmpty: {fileID: 2800000, guid: 767fb67d628e3154083af0e48bdf20cb, type: 3}
+  Coin: {fileID: 2800000, guid: 0c1ad91cff3354840a492b3b541e698d, type: 3}
+  Icon: {fileID: 2800000, guid: 5fb65f690de65444ebd4418f8d019922, type: 3}
+  TitleMusic: {fileID: 8300000, guid: a5a388db85fcb434fa6214ea514c2d2f, type: 3}
+  RunMusic: {fileID: 8300000, guid: f1d12543bac16b443ac32190ff0b5c7e, type: 3}
+  Jump: {fileID: 8300000, guid: 3a1c736f4d0162949a7d2161ba6d6e99, type: 3}
+  Flap: {fileID: 8300000, guid: fa6006135bd3dc4478d88838d64ebc5f, type: 3}
+  Land: {fileID: 8300000, guid: 7b4c81facb4bb8b4789375fd1756397f, type: 3}
+  Shift:
+  - {fileID: 8300000, guid: 6dc639b581a84eb48808b3065753d5f5, type: 3}
+  - {fileID: 8300000, guid: c0fe5c2d75984f746ab1ad27a5007cff, type: 3}
+  - {fileID: 8300000, guid: 09bfa10de0ab7484b9669185dd6085cd, type: 3}
+  - {fileID: 8300000, guid: d1bea7114f65a0646bac68e4e0e01e62, type: 3}
+  Blocked: {fileID: 8300000, guid: ef0968554042cda4db42bf194e0dcc81, type: 3}
+  CoinPickup: {fileID: 8300000, guid: e2acf5a692cbc4b44bc5db7aca45140d, type: 3}
+  HeartPickup: {fileID: 8300000, guid: 7172cb5ef7ca2a143885624c8b1527a7, type: 3}
+  Hurt: {fileID: 8300000, guid: 7ea2d54c6aee5774498fb57eaa1033a9, type: 3}
+  Fall: {fileID: 8300000, guid: 90ef26121c60c9140a7811b7e18ca37e, type: 3}
+  Smash: {fileID: 8300000, guid: 012c7c4999bb6d447ae53442930a93d4, type: 3}
+  Splash: {fileID: 8300000, guid: 0112ae9d6548a5a4db80a72da1e285a7, type: 3}
+  Rustle: {fileID: 8300000, guid: 657b12c68206c0941abb92bb5f240a57, type: 3}
+  Pass: {fileID: 8300000, guid: 9e250cc2b6c0e284e880b1ee2c92f5ce, type: 3}
+  Streak: {fileID: 8300000, guid: a5c53e8d311e19b459bfe33a7d159bfe, type: 3}
+  GameOver: {fileID: 8300000, guid: 1928c39aa94486243a60befc382f788c, type: 3}
+  HighScore: {fileID: 8300000, guid: ecc1be939dd929b4bb7c7562eaab3d35, type: 3}
+  Click: {fileID: 8300000, guid: 9d0d7270fed55a64aa9d8199d18e304a, type: 3}
+  Confirm: {fileID: 8300000, guid: 56b254b397050bb4cbcae42db068e00e, type: 3}
+  Buy: {fileID: 8300000, guid: 024d1966319088949bb2350c787a42ff, type: 3}

@@ -1,0 +1,576 @@
+/*
+ * ShapeShifter HUD: deep forest-teal panels with a warm amber trim; each form keeps its colour
+ * (fox orange, bird blue, golem stone, fish teal). Designed at 1280x720 reference pixels.
+ */
+
+:root {
+    --panel: rgba(14, 24, 26, 0.9);
+    --trim: #f2b84a;
+    --trim-dark: #8a5a1a;
+    --text: #f2f0e0;
+    --muted: #a8c0b4;
+    --red: #e8423a;
+    --good: #9ff0a0;
+
+    color: var(--text);
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.hud,
+.layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.row {
+    flex-direction: row;
+    align-items: center;
+}
+
+.row--end {
+    justify-content: flex-end;
+    margin-top: 2px;
+}
+
+/* ---- Damage vignette ---- */
+
+.hurt {
+    border-width: 40px;
+    border-color: rgba(200, 30, 20, 0.6);
+    opacity: 0;
+}
+
+/* ---- Corners: hearts top left and score top right, as in 2021 ---- */
+
+.corner {
+    position: absolute;
+    top: 12px;
+    padding: 8px 14px;
+    background-color: rgba(10, 20, 22, 0.7);
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: rgba(242, 184, 74, 0.5);
+}
+
+.corner--left {
+    left: 16px;
+}
+
+.corner--right {
+    right: 16px;
+    align-items: flex-end;
+    min-width: 230px;
+}
+
+.hearts {
+    flex-direction: row;
+}
+
+.heart {
+    width: 36px;
+    height: 36px;
+    margin-right: 2px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.score-label {
+    color: var(--trim);
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.score {
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.coin-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.stat {
+    font-size: 18px;
+    color: #ffe070;
+    margin-right: 14px;
+}
+
+.stat--distance {
+    color: var(--muted);
+    margin-right: 0;
+}
+
+.streak {
+    position: absolute;
+    top: 20px;
+    left: 490px;
+    width: 300px;
+    -unity-text-align: middle-center;
+    font-size: 22px;
+    color: var(--trim);
+    background-color: rgba(10, 20, 22, 0.6);
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.pause-button {
+    position: absolute;
+    top: 14px;
+    left: 300px;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    -unity-text-align: middle-center;
+    background-color: rgba(10, 20, 22, 0.7);
+    border-radius: 23px;
+    border-width: 2px;
+    border-color: rgba(242, 184, 74, 0.5);
+}
+
+/* ---- The next obstacle ---- */
+
+.warning {
+    position: absolute;
+    right: 20px;
+    top: 190px;
+    width: 130px;
+    padding: 8px;
+    align-items: center;
+    background-color: rgba(10, 20, 22, 0.75);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(242, 184, 74, 0.6);
+}
+
+.warning--ready {
+    border-color: var(--good);
+}
+
+.warning--urgent {
+    border-color: var(--red);
+    background-color: rgba(90, 16, 16, 0.85);
+}
+
+.warning__title {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 3px;
+}
+
+.warning__icon {
+    width: 64px;
+    height: 64px;
+    margin: 4px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.warning__track {
+    width: 100px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.warning__fill {
+    height: 100%;
+    width: 0;
+    background-color: var(--trim);
+    border-radius: 4px;
+}
+
+.warning__text {
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+/* ---- The form bar ---- */
+
+.formbar {
+    position: absolute;
+    bottom: 14px;
+    left: 360px;
+    width: 560px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.slot {
+    width: 120px;
+    margin: 0 6px;
+    padding: 6px 4px 4px 4px;
+    align-items: center;
+    background-color: rgba(10, 20, 22, 0.7);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.12);
+    opacity: 0.8;
+}
+
+.slot--active {
+    border-color: var(--trim);
+    background-color: rgba(60, 46, 16, 0.85);
+    opacity: 1;
+    scale: 1.08 1.08;
+}
+
+.slot__badge {
+    width: 64px;
+    height: 64px;
+    -unity-background-scale-mode: scale-to-fit;
+    justify-content: flex-end;
+}
+
+.slot__cooldown {
+    width: 100%;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 6px;
+}
+
+.slot__key {
+    font-size: 14px;
+    color: var(--trim);
+    margin-top: 2px;
+}
+
+.slot__name {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.touch-on .slot {
+    width: 140px;
+    padding: 10px 4px;
+}
+
+.touch-on .slot__badge {
+    width: 84px;
+    height: 84px;
+}
+
+.touch-on .formbar {
+    left: 300px;
+    width: 680px;
+}
+
+.touch__jump {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    width: 170px;
+    height: 120px;
+    font-size: 26px;
+    -unity-text-align: middle-center;
+    background-color: rgba(242, 184, 74, 0.35);
+    border-radius: 18px;
+    border-width: 3px;
+    border-color: var(--trim);
+}
+
+/* ---- Floating text ---- */
+
+.floater {
+    position: absolute;
+    font-size: 20px;
+    color: #ffe070;
+    translate: -50% -50%;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: #1c1420;
+}
+
+.floater--bonus {
+    color: var(--good);
+    font-size: 22px;
+}
+
+.floater--hurt {
+    color: #ff8070;
+}
+
+/* ---- Banner ---- */
+
+.banner {
+    position: absolute;
+    left: 290px;
+    width: 700px;
+    top: 120px;
+    padding: 12px 20px;
+    align-items: center;
+    background-color: rgba(10, 20, 22, 0.82);
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: var(--trim);
+}
+
+.banner__title {
+    font-size: 30px;
+    color: var(--trim);
+    -unity-text-align: middle-center;
+}
+
+.banner__sub {
+    font-size: 18px;
+    color: var(--text);
+    margin-top: 4px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+/* ---- Menus ---- */
+
+.menu-layer {
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(4, 10, 12, 0.45);
+}
+
+.menu {
+    width: 680px;
+    padding: 22px 30px;
+    align-items: center;
+    background-color: var(--panel);
+    border-radius: 12px;
+    border-width: 3px;
+    border-color: var(--trim);
+}
+
+.menu--title {
+    width: 760px;
+    background-color: rgba(14, 24, 26, 0.82);
+}
+
+.logo {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo__emblem {
+    width: 112px;
+    height: 112px;
+    margin-right: 18px;
+}
+
+.logo__title {
+    font-size: 58px;
+    color: var(--trim);
+    letter-spacing: 4px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: #3a2208;
+}
+
+.logo__tag {
+    font-size: 18px;
+    color: var(--muted);
+    letter-spacing: 3px;
+}
+
+.menu__title {
+    font-size: 36px;
+    color: var(--trim);
+    margin-bottom: 4px;
+    -unity-text-align: middle-center;
+}
+
+.menu__subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    -unity-text-align: middle-center;
+}
+
+.menu__body {
+    font-size: 18px;
+    margin: 4px 0 10px 0;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    -unity-font-style: normal;
+}
+
+.menu__extra {
+    align-self: stretch;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu__items {
+    align-items: center;
+}
+
+.menu__item {
+    font-size: 24px;
+    padding: 4px 22px;
+    margin: 2px 0;
+    color: var(--muted);
+    border-radius: 6px;
+    -unity-text-align: middle-center;
+}
+
+.menu__item--selected {
+    color: #1c1420;
+    background-color: var(--trim);
+}
+
+.menu__item--disabled {
+    color: rgba(168, 192, 180, 0.35);
+}
+
+.menu__footer {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--muted);
+    -unity-font-style: normal;
+}
+
+/* ---- Characters ---- */
+
+.cards {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    width: 116px;
+    margin: 0 5px;
+    padding: 8px 4px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.card--selected {
+    border-color: var(--trim);
+    background-color: rgba(242, 184, 74, 0.16);
+}
+
+.card--locked .card__preview {
+    -unity-background-image-tint-color: rgba(40, 40, 50, 1);
+}
+
+.card__preview {
+    width: 96px;
+    height: 96px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.card__name {
+    font-size: 18px;
+}
+
+.card__price {
+    font-size: 15px;
+    color: #ffe070;
+}
+
+.card__price--owned {
+    color: var(--muted);
+}
+
+.card__price--worn {
+    color: var(--good);
+}
+
+.forms-preview {
+    flex-direction: row;
+    margin-top: 8px;
+}
+
+.forms-preview__frame {
+    width: 72px;
+    height: 72px;
+    margin: 0 4px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+/* ---- Leaderboard ---- */
+
+.board {
+    width: 460px;
+}
+
+.board__row {
+    flex-direction: row;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+.board__row--head {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.board__row--mine {
+    background-color: rgba(242, 184, 74, 0.25);
+}
+
+.board__rank {
+    width: 50px;
+}
+
+.board__name {
+    width: 110px;
+    letter-spacing: 3px;
+}
+
+.board__score {
+    width: 160px;
+    -unity-text-align: middle-right;
+}
+
+.board__distance {
+    width: 120px;
+    -unity-text-align: middle-right;
+    color: var(--muted);
+}
+
+/* ---- Name entry ---- */
+
+.letters {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.letter {
+    width: 84px;
+    margin: 0 8px;
+    align-items: center;
+}
+
+.letter__arrow {
+    font-size: 22px;
+    color: var(--muted);
+    padding: 2px 20px;
+}
+
+.letter__char {
+    width: 76px;
+    height: 84px;
+    font-size: 58px;
+    -unity-text-align: middle-center;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.letter--active .letter__char {
+    border-color: var(--trim);
+    color: var(--trim);
+}
+
+.letter--active .letter__arrow {
+    color: var(--trim);
+}
