@@ -38,6 +38,17 @@ namespace ShapeShifter.Core.Tests
         }
 
         [Test]
+        public void TheBankStopsAtTheLargestCountInsteadOfOverflowing()
+        {
+            var store = new MemoryStore();
+            var wallet = new Wallet(store);
+            wallet.Deposit(int.MaxValue);
+            wallet.Deposit(1);
+            Assert.That(wallet.Coins, Is.EqualTo(int.MaxValue));
+            Assert.That(new Wallet(store).Coins, Is.EqualTo(int.MaxValue));
+        }
+
+        [Test]
         public void BuyingASkinCostsItsPriceAndUnlocksItForGood()
         {
             var store = new MemoryStore();

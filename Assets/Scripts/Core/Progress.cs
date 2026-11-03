@@ -119,7 +119,7 @@ namespace ShapeShifter.Core
         public void Deposit(int coins)
         {
             if (coins <= 0) return;
-            Coins += coins;
+            Coins = coins > int.MaxValue - Coins ? int.MaxValue : Coins + coins;
             Persist();
         }
 

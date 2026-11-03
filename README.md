@@ -92,7 +92,7 @@ buttons appear on touch screens, or always or never, as chosen in Settings.
 - **Hearts and score.** Five hearts, as in the 2021 game; the wrong form costs one, and a
   short blink of invulnerability follows. A chasm drops any form but the bird and carries it
   across, hurt. Score is metres run plus 10 per coin plus a bonus for every obstacle passed
-  cleanly, multiplied by a streak (x2 after three clean passes, up to x5); a hit breaks it.
+  cleanly, multiplied by a streak (x2 after three clean passes, up to x5); a hit that costs a heart breaks it.
 - **Speed.** From 7 to almost 16 units a second, rising steadily over the first kilometres;
   the track alternates between forest and cavern every 600 metres.
 - **Coins and characters.** Coins sit along the line each form travels (high over chasms
@@ -115,7 +115,7 @@ buttons appear on touch screens, or always or never, as chosen in Settings.
   demo behind the title screen.
 - **Rules without the engine.** Forms, cooldown, obstacles, generation, speed, hearts,
   scoring, the wallet and skins, the leaderboard and settings live in `Assets/Scripts/Core`, a
-  plain C# assembly with no Unity references, behind a small key-value store interface. 76
+  plain C# assembly with no Unity references, behind a small key-value store interface. 77
   EditMode tests cover them through the public API; 7 PlayMode tests drive the real scene from
   the title through a run, pause, game over, name entry, the leaderboard and buying a skin.
 - **A fixed-step simulation.** The rules step at 60 Hz whatever the frame rate, inputs
