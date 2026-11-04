@@ -12,6 +12,9 @@ namespace ShapeShifter.Game
     /// Without the -screenshot argument nothing is created, so normal runs and WebGL builds are
     /// unaffected. Inside the editor (ProjectBuilder.CaptureScreenshots) the camera and the HUD are
     /// rendered off screen at 1280x720 and blended, for machines that cannot run the player.
+    /// Adding <c>-frames N [-fps F]</c> records N frames per scenario at a fixed timestep instead of
+    /// one shot, into <c>&lt;folder&gt;/&lt;scenario&gt;/frame_0000.png...</c>; the <c>gameplay</c>
+    /// scenario lets the autopilot run the track while it records (for the README GIF).
     /// </summary>
     public sealed class ScreenshotScenarios : MonoBehaviour
     {
@@ -22,6 +25,8 @@ namespace ShapeShifter.Game
 
         string folder;
         string[] scenarios;
+        int frames;
+        int fps = 15;
         RenderTexture sceneTarget;
         RenderTexture uiTarget;
 
@@ -33,6 +38,8 @@ namespace ShapeShifter.Game
             var host = new GameObject(nameof(ScreenshotScenarios)).AddComponent<ScreenshotScenarios>();
             host.folder = target;
             host.scenarios = (Argument("-scenario") ?? AllScenarios).Split(',');
+            host.frames = int.TryParse(Argument("-frames"), out int frames) ? frames : 0;
+            host.fps = int.TryParse(Argument("-fps"), out int fps) && fps > 0 ? fps : 15;
         }
 
         IEnumerator Start()
@@ -48,6 +55,11 @@ namespace ShapeShifter.Game
                 UnityEngine.Random.InitState(scenario.GetHashCode());
                 Prepare(director);
                 yield return Stage(director, scenario);
+                if (frames > 0)
+                {
+                    yield return Record(director, scenario);
+                    continue;
+                }
                 Texture2D shot;
                 if (Application.isEditor)
                 {
@@ -112,6 +124,15 @@ namespace ShapeShifter.Game
                     director.ShowCharacters(2);
                     yield return Wait(0.6f);
                     break;
+                case "gameplay":
+                    director.StartRun();
+                    director.AutoPlay = true;
+                    // Past the first 400 m, where the lesson banners stop and the track has sped up.
+                    director.AdvanceUntil(r => r.Distance > 430f, 120f);
+                    director.Hold = true;
+                    director.Hud.HideBanner();
+                    yield return Wait(0.3f);
+                    break;
                 case "pause":
                     director.StartRun();
                     director.AutoPlay = true;
@@ -171,6 +192,41 @@ namespace ShapeShifter.Game
             director.Hold = true;
             director.Hud.HideBanner();
             yield return Wait(settle);
+        }
+
+        /// <summary>
+        /// Writes the given number of frames. A held run (gameplay) is stepped by hand, a fixed
+        /// number of simulation steps per frame, so the recording keeps real speed however slowly
+        /// the frames are written.
+        /// </summary>
+        IEnumerator Record(GameDirector director, string scenario)
+        {
+            string target = Path.Combine(folder, scenario);
+            Directory.CreateDirectory(target);
+            int steps = Mathf.Max(1, Mathf.RoundToInt(1f / (fps * GameDirector.StepTime)));
+            Time.captureFramerate = fps;
+            for (int i = 0; i < frames; i++)
+            {
+                if (director.Hold && director.Run != null && !director.Run.Over)
+                {
+                    for (int s = 0; s < steps; s++) director.StepOnce();
+                }
+                Texture2D shot;
+                if (Application.isEditor)
+                {
+                    yield return null;
+                    shot = CaptureOffscreen();
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                    shot = ScreenCapture.CaptureScreenshotAsTexture();
+                }
+                File.WriteAllBytes(Path.Combine(target, $"frame_{i:0000}.png"), shot.EncodeToPNG());
+                Destroy(shot);
+            }
+            Time.captureFramerate = 0;
+            Debug.Log($"Saved {frames} frames of {scenario}");
         }
 
         static IEnumerator EndRun(GameDirector director, float distance)
