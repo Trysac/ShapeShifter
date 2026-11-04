@@ -4,6 +4,8 @@ A 2D pixel-art endless runner built with Unity where you survive by changing sha
 fox, a bird, a stone golem or a fish: each form is the only way past one kind of obstacle, a
 short cooldown follows every shift, and the track keeps getting faster.
 
+![Gameplay](docs/media/gameplay.gif)
+
 ![The golem smashes a wall](docs/screenshots/golem.png)
 
 | | |
